@@ -451,44 +451,311 @@ state.nested.bar++ // works
 ## refs
 ### ref
 文档地址：https://v3.vuejs.org/api/refs-api.html#ref
+接收一个内部值，返回一个响应式可变的对象，只有一个value属性，指向这个内部值
 
+类型
+```ts
+interface Ref<T> {
+  value: T
+}
 
+function ref<T>(value: T): Ref<T>
+```
+如果将一个对象赋值给ref的value，那么这个对象的深层属性也会做响应式代理
 
+***Sometimes we may need to specify complex types for a ref's inner value.
+ We can do that succinctly by passing a generics argument when calling ref to override the default inference:***
+```ts
+const foo = ref<string | number>('foo') // foo's type: Ref<string | number>
 
+foo.value = 123 // ok!
+```
+ref使用泛型
+```ts
+function useState<State extends string>(Initial:State){
+    const state = ref(initial) as ref(State) //state.value -> State extends string
+    return state
+}
+```
 
+### unref
+接收一个ref对象，返回ref对象的value属性
+如果传入的参数不是ref对象，则返回参数本身
+This is a sugar function for val = isRef(val) ? val.value : val.
 
+### toRef
+为一个响应式对象的属性创建一个ref，将ref传递出去，保持对源对象的响应式链接（！！！）
+```js
+const state = reactive({
+    foo: 1,
+    bar: 2
+})
+const fooRef = toRef(state, 'foo')
+fooRef.value++
+console.log(state.foo)// 2
+state.foo++
+console.log(fooRef.value)// 3
+```
+使用场景：在setup函数中处理props
+```js
+export default {
+    setup(props){
+        useSomeFeature(toRef(props, 'foo'))
+    }
+}
+```
+即使属性不存在，仍然会创建可用的ref；尤其在处理可选参数时，不会被toRefs拾取
 
+### toRefs
+将响应式对象转换成一个普通对象，其中每个属性都是一个ref指向原始响应式对象的相应属性
+```js
+const state = reactive({
+    foo: 1,
+    bar: 2
+})
+const stateAsRefs = toRefs(state)
+/*
+Type of stateAsRefs:
 
+{
+  foo: Ref<number>,
+  bar: Ref<number>
+}
+*/
+// The ref and the original property is "linked"
+state.foo++
+console.log(stateAsRefs.foo.value) // 2
 
+stateAsRefs.foo.value++
+console.log(state.foo) // 3
+```
+使用场景：解构响应式对象时，使用toRefs可以维持其属性的相应特性
+```js
+function useFeatureX(){
+    const state = reactive({
+        foo: 1,
+        bar: 2
+    })
+    return toRefs(state)
+}
+export default {
+    setup(){
+        const {foo, bar} = useFeatureX()
+        return {
+            foo,
+            bar
+        }
+    }
+}
+```
 
+### isRef
+检查一个值是否是ref对象
 
+### customRef
+接收一个包含track，trigger作为参数，返回带有get和set属性的工厂函数，创建一个本地化的带有属性跟踪和变更触发的ref
 
+```html
+<input v-model="text" />
+```
+```js
+function useDebouncedRef(value, delay=200){
+    let timeout
+    return customRef((track,trigger)=>{
+        return {
+            get(){
+                track()
+                return value
+            },
+            set(newValue){
+                clearTimeout(timeout)
+                timeout = setTimeout(()=>{
+                    value = newValue
+                    trigger()
+                }, delay)
+            }
+        }
+    })
+}
+export default{
+    setup(){
+        return {
+            text: useDebouncedRef('hello')
+        }
+    }
+}
+```
+类型：
+```ts
+function customRef<T>(factory: CustomRefFactory<T>): Ref<T>
 
+type CustomRefFactory<T> = (
+  track: () => void,
+  trigger: () => void
+) => {
+  get: () => T
+  set: (value: T) => void
+}
+```
 
+### shallowRef
 
+### triggerRef（？？？）
+执行手动绑定到shallowRef上的所有副作用
+```js
+const shallow = shallowRef({
+  greet: 'Hello, world'
+})
 
+// Logs "Hello, world" once for the first run-through
+watchEffect(() => {
+  console.log(shallow.value.greet)
+})
 
+// This won't trigger the effect because the ref is shallow
+shallow.value.greet = 'Hello, universe'
 
+// Logs "Hello, universe"
+triggerRef(shallow)
+```
 
+## computed and watch
+1、接收一个getter函数，返回一个不可变的ref对象（用于代理来自于getter的返回值）
 
+```js
+const count = ref(1)
+const plusOne = computed(()=>{count.value + 1})
+console.log(plusOne.value) // 2
+plusOne.value++ // error
+```
+2、接收一个带有get和set函数的对象，返回一个可变的ref对象
+```js
+const count = ref(1)
+const plusOne = computed(()=>{
+    get: () => count.value + 1,
+    set: (newValue) => {
+        count.value = newValue - 1
+    }
+})
+plusOne.value = 1
+console.log(count.value)//0
+```
 
+类型：
+```ts
+// read-only
+function computed<T>(getter: () => T): Readonly<Ref<Readonly<T>>>
 
+// writable
+function computed<T>(options: { get: () => T; set: (value: T) => void }): Ref<T>
+```
 
+### watchEffect
+响应式地跟踪依赖，立即执行一个函数，无论依赖的值是否改变
+```js
+const count = ref(0)
 
+watchEffect(() => console.log(count.value))
+// -> logs 0
 
+setTimeout(() => {
+  count.value++
+  // -> logs 1
+}, 100)
+```
+类型：
+```ts
+function watchEffect(
+  effect: (onInvalidate: InvalidateCbRegistrator) => void,
+  options?: WatchEffectOptions
+): StopHandle
 
+interface WatchEffectOptions {
+  flush?: 'pre' | 'post' | 'sync' // default: 'pre'
+  onTrack?: (event: DebuggerEvent) => void
+  onTrigger?: (event: DebuggerEvent) => void
+}
 
+interface DebuggerEvent {
+  effect: ReactiveEffect
+  target: any
+  type: OperationTypes
+  key: string | symbol | undefined
+}
 
+type InvalidateCbRegistrator = (invalidate: () => void) => void
 
+type StopHandle = () => void
+```
 
+### watch
+watch和Options API中的$watch是完全等效的
 
+与watchEffect相比，watch可以：
+1、Perform the side effect lazily;
+2、Be more specific about what state should trigger the watcher to re-run;
+3、Access both the previous and current value of the watched state.
 
+#### watching a single source
+监听器的数据源可以是getter函数（返回一个值），也可以是ref
+```js
+//watching a getter
+const state = reactive({count: 1})
+watch(()=>state.count, (count,prevCount)=>{
+    ...
+})
+// watching a ref
+const count = ref(1)
+watch(count, (count,prevCount)=>{})
 
+```
 
+#### Watching multiple sources
+```js
+watch([fooRef, barRef], ([foo,bar],[prevFoo, prevBar])=>{})
+```
 
+#### Shared behavior with watchEffect（？？？）
+shares behavior with watchEffect in terms of manual stoppage, 
+side effect invalidation (with onInvalidate passed to the callback as the 3rd argument instead),
+ flush timing and debugging.
 
+类型：
+```ts
+// watching single source
+function watch<T>(
+  source: WatcherSource<T>,
+  callback: (
+    value: T,
+    oldValue: T,
+    onInvalidate: InvalidateCbRegistrator
+  ) => void,
+  options?: WatchOptions
+): StopHandle
 
+// watching multiple sources
+function watch<T extends WatcherSource<unknown>[]>(
+  sources: T
+  callback: (
+    values: MapSources<T>,
+    oldValues: MapSources<T>,
+    onInvalidate: InvalidateCbRegistrator
+  ) => void,
+  options? : WatchOptions
+): StopHandle
 
+type WatcherSource<T> = Ref<T> | (() => T)
+
+type MapSources<T> = {
+  [K in keyof T]: T[K] extends WatcherSource<infer V> ? V : never
+}
+
+// see `watchEffect` typing for shared options
+interface WatchOptions extends WatchEffectOptions {
+  immediate?: boolean // default: false
+  deep?: boolean
+}
+```
 
 
 
