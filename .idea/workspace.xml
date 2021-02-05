@@ -3,7 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="ac48c47a-bce6-4429-b2c9-11e7333507bd" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Built-In Component API.md" beforeDir="false" afterPath="$PROJECT_DIR$/Built-In Component API.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Directives and Special Attribute.md" beforeDir="false" afterPath="$PROJECT_DIR$/Directives and Special Attribute.md" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -20,8 +20,8 @@
         <entry file="file://$PROJECT_DIR$/Directives and Special Attribute.md">
           <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
             <state split_layout="FIRST">
-              <first_editor relative-caret-position="227">
-                <caret line="173" column="3" lean-forward="true" selection-start-line="173" selection-start-column="3" selection-end-line="173" selection-end-column="3" />
+              <first_editor relative-caret-position="444">
+                <caret line="466" column="3" lean-forward="true" selection-start-line="466" selection-start-column="3" selection-end-line="466" selection-end-column="3" />
               </first_editor>
               <second_editor />
             </state>
@@ -64,6 +64,11 @@
               <item name="vue3_explore" type="b2602c69:ProjectViewProjectNode" />
               <item name="vue3_explore" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="vue3_explore" type="b2602c69:ProjectViewProjectNode" />
+              <item name="vue3_explore" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
@@ -74,7 +79,7 @@
   <component name="PropertiesComponent">
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="D:/202101workspace/ccloud/bjswccmfront" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="nodejs_package_manager_path" value="npm" />
@@ -116,7 +121,8 @@
       <workItem from="1612252022683" duration="209000" />
       <workItem from="1612322170386" duration="17712000" />
       <workItem from="1612402603488" duration="23142000" />
-      <workItem from="1612486984148" duration="17625000" />
+      <workItem from="1612486984148" duration="17675000" />
+      <workItem from="1612509473681" duration="9336000" />
     </task>
     <task id="LOCAL-00001" summary="内置组件，合成API，响应式API">
       <created>1612433089700</created>
@@ -125,17 +131,24 @@
       <option name="project" value="LOCAL" />
       <updated>1612433089700</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="指令和特殊属性">
+      <created>1612508225984</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1612508225984</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="58688000" />
+    <option name="totallyTimeSpent" value="68074000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.2576" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.26026666" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="npm" order="2" side_tool="true" />
       <window_info id="Favorites" order="3" side_tool="true" />
@@ -163,7 +176,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="内置组件，合成API，响应式API" />
-    <option name="LAST_COMMIT_MESSAGE" value="内置组件，合成API，响应式API" />
+    <MESSAGE value="指令和特殊属性" />
+    <option name="LAST_COMMIT_MESSAGE" value="指令和特殊属性" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/package.json">
@@ -223,11 +237,18 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/App.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="124">
+          <caret line="4" lean-forward="true" selection-start-line="4" selection-end-line="4" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/Directives and Special Attribute.md">
       <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
         <state split_layout="FIRST">
-          <first_editor relative-caret-position="227">
-            <caret line="173" column="3" lean-forward="true" selection-start-line="173" selection-start-column="3" selection-end-line="173" selection-end-column="3" />
+          <first_editor relative-caret-position="444">
+            <caret line="466" column="3" lean-forward="true" selection-start-line="466" selection-start-column="3" selection-end-line="466" selection-end-column="3" />
           </first_editor>
           <second_editor />
         </state>

@@ -163,7 +163,14 @@ modifiers:
 +   .right          仅针对鼠标右键触发的事件处理程序
 +   .middle         仅针对鼠标中键触发的事件处理程序
 +   .passive        给dom事件添加属性{passive: true}
+说明：修饰符出现的目的——让事件处理程序中全部是逻辑代码
+```html
+<!-- Alt + Enter -->
+<input @keyup.alt.enter="clear" />
 
+<!-- Ctrl + Click -->
+<div @click.ctrl="doSomething">Do something</div>
+```
 Details: 
 1、如果使用内联语句，语句可以访问特殊属性$event
 ```html
@@ -208,115 +215,260 @@ v-on:click="handle('ok', $event)"
 
 <!-- object syntax -->
 <button v-on="{ mousedown: doThis, mouseup: doThat }"></button>
+
+<!-- both one() and two() will execute on button click -->
+<button @click="one($event), two($event)">
+  Submit
+</button>
+
 ```
 
 相关链接：
+1、Event Handling：https://v3.vuejs.org/guide/events.html#listening-to-events
+2、试验：
+using @click.prevent.self will prevent all clicks while @click.self.prevent will only prevent clicks on the element itself.
+3、修饰符once，对于自定义组件同样适用
+4、如果包含修饰符passive，则表示事件处理程序（listener）不会调用preventDefault，
+    如果listener调用了preventDefault，那么用户代理除了警告不会做任何事情
+    在移动端尤其有用
+    .passive和.prevent不要一起使用，语义冲突
+5、.exact修饰符
+```html
+<!-- this will fire even if Alt or Shift is also pressed -->
+<button @click.ctrl="onClick">A</button>
 
+<!-- this will only fire when Ctrl and no other keys are pressed -->
+<button @click.ctrl.exact="onCtrlClick">A</button>
 
-
+<!-- this will only fire when no system modifiers are pressed -->
+<button @click.exact="onClick">A</button>
+```
+6、使用v-on和@的几个好处
++   通过浏览器模板，更容易定位事件处理程序
++   因为不用在js代码中手动关联事件监听，viewModel中都是纯逻辑，便于测试
++   当viewModel销毁时，所有的事件监听自动删除
 
 ## v-bind
-Expects: 
-Details:
-
+shorthand： :
+Expects: any(with argument) | Object(without argument)
+Argument: attr or prop (optional)
+Modifier: .camel 将kebab-case属性名转换成驼峰式
+Details: 
+1、如果使用字符串模板或使用vue-loader/vueify编译，则不需要.camel
 案例：
+```html
+<!-- bind an attribute -->
+<img v-bind:src="imageSrc" />
 
+<!-- dynamic attribute name -->
+<button v-bind:[key]="value"></button>
+
+<!-- shorthand -->
+<img :src="imageSrc" />
+
+<!-- shorthand dynamic attribute name -->
+<button :[key]="value"></button>
+
+<!-- with inline string concatenation -->
+<img :src="'/path/to/images/' + fileName" />
+
+<!-- class binding -->
+<div :class="{ red: isRed }"></div>
+<div :class="[classA, classB]"></div>
+<div :class="[classA, { classB: isB, classC: isC }]">
+  <!-- style binding -->
+  <div :style="{ fontSize: size + 'px' }"></div>
+  <div :style="[styleObjectA, styleObjectB]"></div>
+
+  <!-- binding an object of attributes -->
+  <div v-bind="{ id: someProp, 'other-attr': otherProp }"></div>
+
+  <!-- prop binding. "prop" must be declared in my-component. -->
+  <my-component :prop="someThing"></my-component>
+
+  <!-- pass down parent props in common with a child component -->
+  <child-component v-bind="$props"></child-component>
+
+  <!-- XLink -->
+  <svg><a :xlink:special="foo"></a></svg>
+</div>
+```
 
 相关链接：
-
+1、class and style binding: https://v3.vuejs.org/guide/class-and-style.html#binding-html-classes
+2、components-props: https://v3.vuejs.org/guide/component-basics.html#passing-data-to-child-components-with-props
 
 
 
 ## v-model
-Expects: 
-Details:
-
-案例：
-
+Expects: 输入表单元素的值，组件的输出
+Limited-to: input, select, textArea, components
+Modifiers: 
+1、.lazy: 替代input监听change事件
+2、.number: 将有效输入字符串转换成数字
+3、.trim: 将输入去除多余的空格
 
 相关链接：
+1、Form input binding: https://v3.vuejs.org/guide/forms.html#basic-usage
+2、  Form input components using custom events:
+https://v3.vuejs.org/guide/component-custom-events.html#validate-emitted-events
+
+Details: 
+
+案例：
 
 
 
 ## v-slot
-Expects: 
+shorthand: #
+Expects: 有效的js表达式，只有在向插槽传递props时，才是必须的
+Argument: 插槽名称（默认为default）
+Limited-to: 
+1、仅适用于<template>
+2、components (for a lone default slot with props)
 Details:
 
 案例：
+```html
+<!-- Named slots -->
+<base-layout>
+  <template v-slot:header>
+    Header content
+  </template>
 
+  <template v-slot:default>
+    Default slot content
+  </template>
+
+  <template v-slot:footer>
+    Footer content
+  </template>
+</base-layout>
+
+<!-- Named slot that receives props -->
+<infinite-scroll>
+  <template v-slot:item="slotProps">
+    <div class="item">
+      {{ slotProps.item.text }}
+    </div>
+  </template>
+</infinite-scroll>
+
+<!-- Default slot that receive props, with destructuring -->
+<mouse-position v-slot="{ x, y }">
+  Mouse position: {{ x }}, {{ y }}
+</mouse-position>
+```
 
 相关链接：
+slot: https://v3.vuejs.org/guide/component-slots.html#slot-content
 
 
 
 
 ## v-pre
-Expects: 
+Expects: none
 Details:
-
-案例：
-
-
-相关链接：
-
-
-
+1、对其内容及子节点跳过编译
+2、跳过大量没有指令的节点，可以加快编译速度
 
 ## v-cloak
-Expects: 
-Details:
+Expects: none
+Details: 
+1、这个指令会一直存在，直到关联的组件实例编译完成
+2、结合[v-cloak] { display: none }等css规则，这个指令用来隐藏未编译的mustacle绑定，直到组件实例准备完成
 
 案例：
-
-
-相关链接：
-
-
-
+```css
+[v-cloak] {
+  display: none;
+}
+```
+```html
+<div v-cloak>
+  {{ message }}
+</div>
+```
 
 ## v-once
-Expects: 
+Expects: none
 Details:
-
-案例：
-
-
-相关链接：
-
-
-
-
 
 ## v-is
-Expects: 
-Details:
-
+注意事项：
+1、仅会对直接写在html中的vue模板产生影响
+Expects: string literal
+Limited-to: native HTML elements
+Details: 
+When using in-DOM templates, the template is subject to native HTML parsing rules.
+Some HTML elements, such as <ul>, <ol>, <table> and <select> have restrictions on what elements can appear inside them, 
+and some elements such as <li>, <tr>, and <option> can only appear inside certain other elements. 
+As a workaround, we can use v-is directive on these elements:
 案例：
+v-is functions like a dynamic 2.x :is binding - so to render a component by its registered name, 
+its value should be a JavaScript string literal:
+```html
+<!-- Incorrect, nothing will be rendered -->
+<tr v-is="blog-post-row"></tr>
 
-
-相关链接：
-
-
-
-
-
-
-
+<!-- Correct -->
+<tr v-is="'blog-post-row'"></tr>
+```
 
 
 # Special Attribute 特殊属性
 ## key
 值的类型：number | string
 
+强制替换节点的场景：
+1、适当的触发组件的生命周期钩子
+2、触发过渡
 
-
+案例：
+```html
+<transition>
+  <span :key="text">{{ text }}</span>
+</transition>
+```
+When text changes, the <span> will always be replaced instead of patched,
+ so a transition will be triggered
+ 
 ## ref
+Expect: string | Function
+1、如果用在一个组件，引用将成为组件的实例
+2、用在普通的DOM元素上，这个引用将是这个元素
+```html
+<!-- vm.$refs.p will be the DOM node -->
+<p ref="p">hello</p>
 
+<!-- vm.$refs.child will be the child component instance -->
+<child-component ref="child"></child-component>
 
+<!-- When bound dynamically, we can define ref as a callback function, passing the element or component instance explicitly -->
+<child-component :ref="(el) => child = el"></child-component>
+```
+
+An important note about the ref registration timing: 
+because the refs themselves are created as a result of the render function, 
+you cannot access them on the initial render - they don't exist yet! $refs is also non-reactive, 
+therefore you should not attempt to use it in templates for data-binding.
+
+相关链接：
+child component refs: https://v3.vuejs.org/guide/component-template-refs.html
 
 ## is
+Expects: string | Object(component's option object)
 
+用于动态组件
 
+```html
+<!-- component changes when currentView changes -->
+<component :is="currentView"></component>
+```
+
+相关链接:
+1、Dynamic Components：https://v3.vuejs.org/guide/component-dynamic-async.html#dynamic-components-with-keep-alive
+2、DOM Template Parsing Caveats： https://v3.vuejs.org/guide/component-basics.html#dom-template-parsing-caveats
 
 
 
