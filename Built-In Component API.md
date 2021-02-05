@@ -97,12 +97,29 @@ its activated and deactivated lifecycle hooks will be invoked accordingly.
 
 6、keep-alive无法与函数组件一起使用，因为函数组件没有实例
 
+# slot
+props：
++   name： 具名插槽的名称
 
+用法：
+1、slot用作组件模板中的内容分发出口，其本身会被代替
 
+关于slot：https://v3.vuejs.org/guide/component-basics.html#using-v-model-on-components
 
+# teleport  （传送）
+props：
++   to: (string) 必须是有效的查询选择器，或一个页面元素，将teleport内的内容移动到指定的元素内
++   disabled: (Boolean) ，可选，如果值为true，则内容不会传送到任何位置，而是渲染在teleport的父元素内
 
+```html
+<teleport to="#popup" :disabled="displayVideoInline">
+  <video src="./my-movie.mp4">
+</teleport>
+```
 
-
+注意事项：
+Notice that this will move the actual DOM nodes instead of being destroyed and recreated, 
+and it will keep any component instances alive as well. All stateful HTML elements (i.e. a playing video) will keep their state.
 
 
 

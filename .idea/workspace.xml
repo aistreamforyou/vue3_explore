@@ -3,7 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="ac48c47a-bce6-4429-b2c9-11e7333507bd" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vue3文档.md" beforeDir="false" afterPath="$PROJECT_DIR$/vue3文档.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Built-In Component API.md" beforeDir="false" afterPath="$PROJECT_DIR$/Built-In Component API.md" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -16,29 +16,12 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Composition API.md">
-          <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
-            <state split_layout="FIRST">
-              <first_editor relative-caret-position="506">
-                <caret line="126" lean-forward="true" selection-start-line="126" selection-end-line="126" />
-                <folding>
-                  <element signature="e#0#33#1" expanded="true" />
-                  <element signature="e#0#33#1" expanded="true" />
-                  <element signature="e#0#38#1" expanded="true" />
-                </folding>
-              </first_editor>
-              <second_editor />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/Built-In Component API.md">
+        <entry file="file://$PROJECT_DIR$/Directives and Special Attribute.md">
           <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
             <state split_layout="FIRST">
-              <first_editor relative-caret-position="537">
-                <caret line="95" column="11" lean-forward="true" selection-start-line="95" selection-start-column="11" selection-end-line="95" selection-end-column="11" />
+              <first_editor relative-caret-position="227">
+                <caret line="173" column="3" lean-forward="true" selection-start-line="173" selection-start-column="3" selection-end-line="173" selection-end-column="3" />
               </first_editor>
               <second_editor />
             </state>
@@ -58,6 +41,8 @@
         <option value="$PROJECT_DIR$/vue3文档.md" />
         <option value="$PROJECT_DIR$/Composition API.md" />
         <option value="$PROJECT_DIR$/Built-In Component API.md" />
+        <option value="$PROJECT_DIR$/Special Attribute.md" />
+        <option value="$PROJECT_DIR$/Directives and Special Attribute.md" />
       </list>
     </option>
   </component>
@@ -72,7 +57,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -84,6 +68,7 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -130,18 +115,27 @@
       <updated>1612252021381</updated>
       <workItem from="1612252022683" duration="209000" />
       <workItem from="1612322170386" duration="17712000" />
-      <workItem from="1612402603488" duration="23056000" />
+      <workItem from="1612402603488" duration="23142000" />
+      <workItem from="1612486984148" duration="17625000" />
     </task>
+    <task id="LOCAL-00001" summary="内置组件，合成API，响应式API">
+      <created>1612433089700</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1612433089700</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="40977000" />
+    <option name="totallyTimeSpent" value="58688000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.25493333" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.2576" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="npm" order="2" side_tool="true" />
       <window_info id="Favorites" order="3" side_tool="true" />
@@ -166,6 +160,10 @@
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="内置组件，合成API，响应式API" />
+    <option name="LAST_COMMIT_MESSAGE" value="内置组件，合成API，响应式API" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/package.json">
@@ -205,26 +203,31 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Composition API.md">
+    <entry file="file://$PROJECT_DIR$/Built-In Component API.md">
       <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
         <state split_layout="FIRST">
-          <first_editor relative-caret-position="506">
-            <caret line="126" lean-forward="true" selection-start-line="126" selection-end-line="126" />
-            <folding>
-              <element signature="e#0#33#1" expanded="true" />
-              <element signature="e#0#33#1" expanded="true" />
-              <element signature="e#0#38#1" expanded="true" />
-            </folding>
+          <first_editor>
+            <caret column="11" lean-forward="true" selection-start-column="11" selection-end-column="11" />
           </first_editor>
           <second_editor />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Built-In Component API.md">
+    <entry file="file://$PROJECT_DIR$/Composition API.md">
       <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
         <state split_layout="FIRST">
-          <first_editor relative-caret-position="537">
-            <caret line="95" column="11" lean-forward="true" selection-start-line="95" selection-start-column="11" selection-end-line="95" selection-end-column="11" />
+          <first_editor relative-caret-position="196">
+            <caret line="116" column="16" lean-forward="true" selection-start-line="116" selection-start-column="16" selection-end-line="116" selection-end-column="16" />
+          </first_editor>
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Directives and Special Attribute.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="FIRST">
+          <first_editor relative-caret-position="227">
+            <caret line="173" column="3" lean-forward="true" selection-start-line="173" selection-start-column="3" selection-end-line="173" selection-end-column="3" />
           </first_editor>
           <second_editor />
         </state>
