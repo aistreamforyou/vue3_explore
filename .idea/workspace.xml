@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="ac48c47a-bce6-4429-b2c9-11e7333507bd" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Directives and Special Attribute.md" beforeDir="false" afterPath="$PROJECT_DIR$/Directives and Special Attribute.md" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -15,13 +14,25 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
+    <leaf>
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Directives and Special Attribute.md">
           <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
             <state split_layout="FIRST">
-              <first_editor relative-caret-position="444">
-                <caret line="466" column="3" lean-forward="true" selection-start-line="466" selection-start-column="3" selection-end-line="466" selection-end-column="3" />
+              <first_editor relative-caret-position="785">
+                <caret line="409" column="7" lean-forward="true" selection-start-line="409" selection-start-column="7" selection-end-line="409" selection-end-column="7" />
+              </first_editor>
+              <second_editor />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/Instance Properties and Methods.md">
+          <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+            <state split_layout="FIRST">
+              <first_editor relative-caret-position="568">
+                <caret line="294" column="33" lean-forward="true" selection-start-line="294" selection-start-column="33" selection-end-line="294" selection-end-column="33" />
               </first_editor>
               <second_editor />
             </state>
@@ -43,6 +54,7 @@
         <option value="$PROJECT_DIR$/Built-In Component API.md" />
         <option value="$PROJECT_DIR$/Special Attribute.md" />
         <option value="$PROJECT_DIR$/Directives and Special Attribute.md" />
+        <option value="$PROJECT_DIR$/Instance Properties and Methods.md" />
       </list>
     </option>
   </component>
@@ -57,6 +69,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -73,7 +86,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -122,7 +134,8 @@
       <workItem from="1612322170386" duration="17712000" />
       <workItem from="1612402603488" duration="23142000" />
       <workItem from="1612486984148" duration="17675000" />
-      <workItem from="1612509473681" duration="9336000" />
+      <workItem from="1612509473681" duration="9438000" />
+      <workItem from="1612660219389" duration="11574000" />
     </task>
     <task id="LOCAL-00001" summary="内置组件，合成API，响应式API">
       <created>1612433089700</created>
@@ -138,17 +151,24 @@
       <option name="project" value="LOCAL" />
       <updated>1612508225984</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="指令和特殊属性">
+      <created>1612519964885</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1612519964885</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="68074000" />
+    <option name="totallyTimeSpent" value="79750000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.26026666" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.26293334" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="npm" order="2" side_tool="true" />
       <window_info id="Favorites" order="3" side_tool="true" />
@@ -247,8 +267,18 @@
     <entry file="file://$PROJECT_DIR$/Directives and Special Attribute.md">
       <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
         <state split_layout="FIRST">
-          <first_editor relative-caret-position="444">
-            <caret line="466" column="3" lean-forward="true" selection-start-line="466" selection-start-column="3" selection-end-line="466" selection-end-column="3" />
+          <first_editor relative-caret-position="785">
+            <caret line="409" column="7" lean-forward="true" selection-start-line="409" selection-start-column="7" selection-end-line="409" selection-end-column="7" />
+          </first_editor>
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Instance Properties and Methods.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="FIRST">
+          <first_editor relative-caret-position="568">
+            <caret line="294" column="33" lean-forward="true" selection-start-line="294" selection-start-column="33" selection-end-line="294" selection-end-column="33" />
           </first_editor>
           <second_editor />
         </state>
